@@ -49,8 +49,7 @@ import com.google.zxing.Result;
  */
 public final class CaptureActivityHandler extends Handler {
 
-    private static final String TAG = CaptureActivityHandler.class
-            .getSimpleName();
+    private static final String TAG = CaptureActivityHandler.class.getSimpleName();
 
     private final CaptureActivity activity;
 
@@ -112,26 +111,20 @@ public final class CaptureActivityHandler extends Handler {
             Bitmap barcode = null;
             float scaleFactor = 1.0f;
             if (bundle != null) {
-                byte[] compressedBitmap = bundle
-                        .getByteArray(DecodeThread.BARCODE_BITMAP);
+                byte[] compressedBitmap = bundle.getByteArray(DecodeThread.BARCODE_BITMAP);
                 if (compressedBitmap != null) {
-                    barcode = BitmapFactory.decodeByteArray(
-                            compressedBitmap, 0, compressedBitmap.length,
-                            null);
+                    barcode = BitmapFactory.decodeByteArray(compressedBitmap, 0, compressedBitmap.length, null);
                     // Mutable copy:
                     barcode = barcode.copy(Bitmap.Config.ARGB_8888, true);
                 }
-                scaleFactor = bundle
-                        .getFloat(DecodeThread.BARCODE_SCALED_FACTOR);
+                scaleFactor = bundle.getFloat(DecodeThread.BARCODE_SCALED_FACTOR);
             }
-            activity.handleDecode((Result) message.obj, barcode,
-                    scaleFactor);
+            activity.handleDecode((Result) message.obj, barcode, scaleFactor);
 
         } else if (message.what == R.id.decode_failed) {// We're decoding as fast as possible, so when one decode fails,
             // start another.
             state = State.PREVIEW;
-            cameraManager.requestPreviewFrame(decodeThread.getHandler(),
-                    R.id.decode);
+            cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
 
         } else if (message.what == R.id.return_scan_result) {
             Log.d(TAG, "Got return scan result message");
@@ -149,9 +142,7 @@ public final class CaptureActivityHandler extends Handler {
             /**
              * 这段代码是zxing项目组想要用chrome打开浏览器浏览url
              */
-            ResolveInfo resolveInfo = activity.getPackageManager()
-                    .resolveActivity(intent,
-                            PackageManager.MATCH_DEFAULT_ONLY);
+            ResolveInfo resolveInfo = activity.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
             String browserPackageName = null;
             if (resolveInfo != null && resolveInfo.activityInfo != null) {
                 browserPackageName = resolveInfo.activityInfo.packageName;
@@ -159,19 +150,16 @@ public final class CaptureActivityHandler extends Handler {
             }
 
             // Needed for default Android browser / Chrome only apparently
-            if ("com.android.browser".equals(browserPackageName)
-                    || "com.android.chrome".equals(browserPackageName)) {
+            if ("com.android.browser".equals(browserPackageName) || "com.android.chrome".equals(browserPackageName)) {
                 intent.setPackage(browserPackageName);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(Browser.EXTRA_APPLICATION_ID,
-                        browserPackageName);
+                intent.putExtra(Browser.EXTRA_APPLICATION_ID, browserPackageName);
             }
 
             try {
                 activity.startActivity(intent);
             } catch (ActivityNotFoundException ignored) {
-                Log.w(TAG, "Can't find anything to handle VIEW of URI "
-                        + url);
+                Log.w(TAG, "Can't find anything to handle VIEW of URI " + url);
             }
 
         }
@@ -204,8 +192,7 @@ public final class CaptureActivityHandler extends Handler {
             state = State.PREVIEW;
 
             // 向decodeThread绑定的handler（DecodeHandler)发送解码消息
-            cameraManager.requestPreviewFrame(decodeThread.getHandler(),
-                    R.id.decode);
+            cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
             activity.drawViewfinder();
         }
     }

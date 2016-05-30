@@ -153,22 +153,19 @@ public final class ViewfinderView extends View {
                 paint.setAlpha(OPAQUE);
                 paint.setColor(resultPointColor);
                 for (ResultPoint point : currentPossible) {
-                    canvas.drawCircle(frame.left + point.getX(), frame.top
-                            + point.getY(), 6.0f, paint);
+                    canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 6.0f, paint);
                 }
             }
             if (currentLast != null) {
                 paint.setAlpha(OPAQUE / 2);
                 paint.setColor(resultPointColor);
                 for (ResultPoint point : currentLast) {
-                    canvas.drawCircle(frame.left + point.getX(), frame.top
-                            + point.getY(), 3.0f, paint);
+                    canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 3.0f, paint);
                 }
             }
 
             // 只刷新扫描框的内容，其他地方不刷新
-            postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top,
-                    frame.right, frame.bottom);
+            postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
 
         }
     }
@@ -200,9 +197,7 @@ public final class ViewfinderView extends View {
         lineRect.right = frame.right - MIDDLE_LINE_PADDING;
         lineRect.top = slideTop;
         lineRect.bottom = (slideTop + MIDDLE_LINE_WIDTH);
-        canvas.drawBitmap(((BitmapDrawable) (BitmapDrawable) getResources()
-                        .getDrawable(R.drawable.scan_laser)).getBitmap(), null,
-                lineRect, paint);
+        canvas.drawBitmap(((BitmapDrawable) (BitmapDrawable) getResources().getDrawable(R.drawable.scan_laser)).getBitmap(), null, lineRect, paint);
 
     }
 
@@ -225,8 +220,7 @@ public final class ViewfinderView extends View {
         // 扫描框的左边面到屏幕左边，扫描框的右边到屏幕右边
         canvas.drawRect(0, 0, width, frame.top, paint);
         canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
-        canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1,
-                paint);
+        canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
         canvas.drawRect(0, frame.bottom + 1, width, height, paint);
     }
 
@@ -245,26 +239,15 @@ public final class ViewfinderView extends View {
         /**
          * 这些资源可以用缓存进行管理，不需要每次刷新都新建
          */
-        Bitmap bitmapCornerTopleft = BitmapFactory.decodeResource(resources,
-                R.drawable.scan_corner_top_left);
-        Bitmap bitmapCornerTopright = BitmapFactory.decodeResource(resources,
-                R.drawable.scan_corner_top_right);
-        Bitmap bitmapCornerBottomLeft = BitmapFactory.decodeResource(resources,
-                R.drawable.scan_corner_bottom_left);
-        Bitmap bitmapCornerBottomRight = BitmapFactory.decodeResource(
-                resources, R.drawable.scan_corner_bottom_right);
+        Bitmap bitmapCornerTopleft = BitmapFactory.decodeResource(resources, R.drawable.scan_corner_top_left);
+        Bitmap bitmapCornerTopright = BitmapFactory.decodeResource(resources, R.drawable.scan_corner_top_right);
+        Bitmap bitmapCornerBottomLeft = BitmapFactory.decodeResource(resources, R.drawable.scan_corner_bottom_left);
+        Bitmap bitmapCornerBottomRight = BitmapFactory.decodeResource(resources, R.drawable.scan_corner_bottom_right);
 
-        canvas.drawBitmap(bitmapCornerTopleft, frame.left + CORNER_PADDING,
-                frame.top + CORNER_PADDING, paint);
-        canvas.drawBitmap(bitmapCornerTopright, frame.right - CORNER_PADDING
-                        - bitmapCornerTopright.getWidth(), frame.top + CORNER_PADDING,
-                paint);
-        canvas.drawBitmap(bitmapCornerBottomLeft, frame.left + CORNER_PADDING,
-                2 + (frame.bottom - CORNER_PADDING - bitmapCornerBottomLeft
-                        .getHeight()), paint);
-        canvas.drawBitmap(bitmapCornerBottomRight, frame.right - CORNER_PADDING
-                - bitmapCornerBottomRight.getWidth(), 2 + (frame.bottom
-                - CORNER_PADDING - bitmapCornerBottomRight.getHeight()), paint);
+        canvas.drawBitmap(bitmapCornerTopleft, frame.left + CORNER_PADDING, frame.top + CORNER_PADDING, paint);
+        canvas.drawBitmap(bitmapCornerTopright, frame.right - CORNER_PADDING - bitmapCornerTopright.getWidth(), frame.top + CORNER_PADDING, paint);
+        canvas.drawBitmap(bitmapCornerBottomLeft, frame.left + CORNER_PADDING, 2 + (frame.bottom - CORNER_PADDING - bitmapCornerBottomLeft.getHeight()), paint);
+        canvas.drawBitmap(bitmapCornerBottomRight, frame.right - CORNER_PADDING - bitmapCornerBottomRight.getWidth(), 2 + (frame.bottom - CORNER_PADDING - bitmapCornerBottomRight.getHeight()), paint);
 
         bitmapCornerTopleft.recycle();
         bitmapCornerTopleft = null;
