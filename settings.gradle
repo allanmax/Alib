@@ -1,1 +1,1 @@
-include ':app', ':barscan'
+include ':app', ':barscan', ':nfc'

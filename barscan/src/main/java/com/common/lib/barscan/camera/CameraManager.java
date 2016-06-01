@@ -189,7 +189,6 @@ public final class CameraManager {
 
     /**
      * Convenience method for
-     * {@link org.madmatrix.zxing.android.CaptureActivity}
      */
     public synchronized void setTorch(boolean newSetting) {
         if (newSetting != configManager.getTorchState(camera)) {
