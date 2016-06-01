@@ -18,7 +18,7 @@ import java.util.TimerTask;
 /**
  * Created by zhaoyl on 16/4/26.
  */
-public abstract class BaseFragment extends FragmentActivity {
+public abstract class NfcBaseFragment extends FragmentActivity {
 
 
     private NfcAdapter mAdapter;
