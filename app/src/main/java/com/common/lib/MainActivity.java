@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.common.lib.barscan.CaptureActivity;
 import com.common.lib.nfc.NfcActivity;
+import com.wsncm.lib.ndef.NdefActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
                 openNfc();
             }
         });
+
+
+
+        findViewById(R.id.ndef_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNdef();
+            }
+        });
     }
 
 
@@ -40,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void openNfc() {
         Intent intent = new Intent(this, NfcActivity.class);
+        startActivity(intent);
+    }
+
+
+    private void openNdef() {
+        Intent intent = new Intent(this, NdefActivity.class);
         startActivity(intent);
     }
 }
