@@ -33,7 +33,8 @@ import java.util.Map;
  * shows feedback as the image processing is happening, and then overlays the
  * results when a scan is successful.
  * <p/>
- * 此Activity所做的事： 1.开启camera，在后台独立线程中完成扫描任务；
+ * 此Activity所做的事：
+ * 1.开启camera，在后台独立线程中完成扫描任务；
  * 2.绘制了一个扫描区（viewfinder）来帮助用户将条码置于其中以准确扫描；
  * 3.扫描成功后会将扫描结果返回上一界面。
  *
@@ -224,8 +225,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         if (holder == null) {
-            Log.e(TAG,
-                    "*** WARNING *** surfaceCreated() gave us a null surface!");
+            Log.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
         }
         if (!hasSurface) {
             hasSurface = true;
@@ -244,6 +244,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     }
 
     /**
+     * 在这个可以修改返回上一个界面
      * A valid barcode has been found, so give an indication of success and show
      * the results.
      *
@@ -301,8 +302,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         }
 
         if (cameraManager.isOpen()) {
-            Log.w(TAG,
-                    "initCamera() while already open -- late SurfaceView callback?");
+            Log.w(TAG, "initCamera() while already open -- late SurfaceView callback?");
             return;
         }
         try {
@@ -339,8 +339,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
                 savedResultToShow = result;
             }
             if (savedResultToShow != null) {
-                Message message = Message.obtain(handler,
-                        R.id.decode_succeeded, savedResultToShow);
+                Message message = Message.obtain(handler, R.id.decode_succeeded, savedResultToShow);
                 handler.sendMessage(message);
             }
             savedResultToShow = null;

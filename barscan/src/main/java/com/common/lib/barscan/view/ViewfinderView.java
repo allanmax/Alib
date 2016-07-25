@@ -83,9 +83,9 @@ public final class ViewfinderView extends View {
     private final int resultColor;
 
     private final int resultPointColor;
-    private List<ResultPoint> possibleResultPoints;
+//    private List<ResultPoint> possibleResultPoints;
 
-    private List<ResultPoint> lastPossibleResultPoints;
+//    private List<ResultPoint> lastPossibleResultPoints;
 
     /**
      * 第一次绘制控件
@@ -109,8 +109,8 @@ public final class ViewfinderView extends View {
         resultColor = resources.getColor(R.color.result_view);
 
         resultPointColor = resources.getColor(R.color.possible_result_points);
-        possibleResultPoints = new ArrayList<ResultPoint>(5);
-        lastPossibleResultPoints = null;
+//        possibleResultPoints = new ArrayList<ResultPoint>(5);
+//        lastPossibleResultPoints = null;
 
     }
 
@@ -143,26 +143,26 @@ public final class ViewfinderView extends View {
             // 绘制扫描线
             drawScanningLine(canvas, frame);
 
-            List<ResultPoint> currentPossible = possibleResultPoints;
-            Collection<ResultPoint> currentLast = lastPossibleResultPoints;
-            if (currentPossible.isEmpty()) {
-                lastPossibleResultPoints = null;
-            } else {
-                possibleResultPoints = new ArrayList<ResultPoint>(5);
-                lastPossibleResultPoints = currentPossible;
-                paint.setAlpha(OPAQUE);
-                paint.setColor(resultPointColor);
-                for (ResultPoint point : currentPossible) {
-                    canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 6.0f, paint);
-                }
-            }
-            if (currentLast != null) {
-                paint.setAlpha(OPAQUE / 2);
-                paint.setColor(resultPointColor);
-                for (ResultPoint point : currentLast) {
-                    canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 3.0f, paint);
-                }
-            }
+//            List<ResultPoint> currentPossible = possibleResultPoints;
+//            Collection<ResultPoint> currentLast = lastPossibleResultPoints;
+//            if (currentPossible.isEmpty()) {
+//                lastPossibleResultPoints = null;
+//            } else {
+//                possibleResultPoints = new ArrayList<ResultPoint>(5);
+//                lastPossibleResultPoints = currentPossible;
+//                paint.setAlpha(OPAQUE);
+//                paint.setColor(resultPointColor);
+//                for (ResultPoint point : currentPossible) {
+//                    canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 6.0f, paint);
+//                }
+//            }
+//            if (currentLast != null) {
+//                paint.setAlpha(OPAQUE / 2);
+//                paint.setColor(resultPointColor);
+//                for (ResultPoint point : currentLast) {
+//                    canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 3.0f, paint);
+//                }
+//            }
 
             // 只刷新扫描框的内容，其他地方不刷新
             postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
@@ -197,7 +197,8 @@ public final class ViewfinderView extends View {
         lineRect.right = frame.right - MIDDLE_LINE_PADDING;
         lineRect.top = slideTop;
         lineRect.bottom = (slideTop + MIDDLE_LINE_WIDTH);
-        canvas.drawBitmap(((BitmapDrawable) (BitmapDrawable) getResources().getDrawable(R.drawable.scan_laser)).getBitmap(), null, lineRect, paint);
+        //中间动画线
+        //canvas.drawBitmap(((BitmapDrawable) (BitmapDrawable) getResources().getDrawable(R.drawable.scan_laser)).getBitmap(), null, lineRect, paint);
 
     }
 
@@ -281,15 +282,15 @@ public final class ViewfinderView extends View {
     }
 
     public void addPossibleResultPoint(ResultPoint point) {
-        List<ResultPoint> points = possibleResultPoints;
-        synchronized (points) {
-            points.add(point);
-            int size = points.size();
-            if (size > MAX_RESULT_POINTS) {
-                // trim it
-                points.subList(0, size - MAX_RESULT_POINTS / 2).clear();
-            }
-        }
+//        List<ResultPoint> points = possibleResultPoints;
+//        synchronized (points) {
+//            points.add(point);
+//            int size = points.size();
+//            if (size > MAX_RESULT_POINTS) {
+//                // trim it
+//                points.subList(0, size - MAX_RESULT_POINTS / 2).clear();
+//            }
+//        }
     }
 
     /**
